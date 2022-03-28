@@ -1,4 +1,4 @@
-use std::thread;
+use std::{thread, time::Duration};
 
 fn main() {
     let expensive_closure = |num| {
@@ -37,6 +37,9 @@ fn main() {
                }
            }
       }
+
+    
+}
 // lazy evaluation
 #[derive()]
 struct Cacher<T>
@@ -67,5 +70,12 @@ impl<T> Cacher<T>
             }
     }
 }
-    
+#[test]
+fn call_with_different_values() {
+    let mut c = Cacher::new(|a| a);
+
+    let v1 = c.value(1);
+    let v2 = c.value(2);
+
+    assert_eq!(v2, 2);
 }
